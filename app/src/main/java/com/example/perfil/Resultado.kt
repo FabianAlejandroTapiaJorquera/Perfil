@@ -1,4 +1,4 @@
-package com.example.perfil.repositorio
+package com.example.perfil
 
 sealed class Resultado<out T> {
     class Loading<out T>: Resultado<T>()

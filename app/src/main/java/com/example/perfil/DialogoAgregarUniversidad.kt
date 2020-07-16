@@ -1,14 +1,18 @@
-package com.example.perfil.repositorio
+package com.example.perfil
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.perfil.R
+import com.example.perfil.subirDatos.SubirUniversidad
+import kotlinx.android.synthetic.main.agregar_universidad.*
 
 
-class DialogoAgregarUniversidad: DialogFragment() {
+class DialogoAgregarUniversidad(): DialogFragment() {
+
+    private lateinit var firebase: SubirUniversidad
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {

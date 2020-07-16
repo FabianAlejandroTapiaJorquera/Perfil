@@ -5,11 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.perfil.R
-import com.example.perfil.repositorio.DialogoAgregarUniversidad
+import com.example.perfil.DialogoAgregarUniversidad
 import kotlinx.android.synthetic.main.fragment_inicio.*
 
 class InicioFragment : Fragment() {

@@ -2,7 +2,7 @@ package com.example.perfil.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.perfil.repositorio.Resultado
+import com.example.perfil.Resultado
 import com.example.perfil.repositorio.local.UniversidadesUseCase
 import kotlinx.coroutines.Dispatchers
 
