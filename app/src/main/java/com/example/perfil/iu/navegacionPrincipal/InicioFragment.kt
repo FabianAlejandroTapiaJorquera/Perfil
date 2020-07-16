@@ -5,13 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+
 import com.example.perfil.R
-import com.example.perfil.DialogoAgregarUniversidad
+import com.example.perfil.iu.SubirUniversidadFragment
+import com.example.perfil.subirDatos.SubirUniversidad
 import kotlinx.android.synthetic.main.fragment_inicio.*
+
 
 class InicioFragment : Fragment() {
 
-    private val agregarPop by lazy { DialogoAgregarUniversidad() }
+    private val subirUniversidadFragment by lazy { SubirUniversidadFragment() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,9 +29,9 @@ class InicioFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //OnCLick
-        agregarUniversidad.setOnClickListener( View.OnClickListener {
-            agregarPop.show(childFragmentManager, "Pop")
-        } )
+        agregarUniversidadFBTN.setOnClickListener {
+            subirUniversidadFragment.show(childFragmentManager, "Subir Universidad")
+        }
 
     }
 
