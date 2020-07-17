@@ -9,7 +9,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.example.perfil.R
 import com.example.perfil.Universidad
@@ -35,7 +38,8 @@ class SubirUniversidadFragment : DialogFragment() {
     private lateinit var nombre: EditText
     private lateinit var direccion: EditText
     private lateinit var telefono: EditText
-    private lateinit var foto: CircleImageView
+    private lateinit var rutaImagen: TextView
+    private lateinit var foto: ImageButton
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return crearDialogo()
@@ -53,7 +57,8 @@ class SubirUniversidadFragment : DialogFragment() {
         nombre = view.findViewById(R.id.auNombre)
         direccion = view.findViewById(R.id.auDireccion)
         telefono = view.findViewById(R.id.auTelefono)
-        foto = view.findViewById(R.id.agFotoPerfil)
+        foto = view.findViewById(R.id.auFoto)
+        rutaImagen = view.findViewById(R.id.auFotoRuta)
 
 
        funcionesBotones()
@@ -93,8 +98,9 @@ class SubirUniversidadFragment : DialogFragment() {
 
         if (requestCode == GALLERY_PICK_INTENT && resultCode == RESULT_OK) {
             val uri = data?.data
-            val referencia = FirebaseStorage.getInstance().getReference().child("fotos").child(codigo).child(uri!!.lastPathSegment.toString())
+            val referencia = FirebaseStorage.getInstance().getReference().child("fotos").child(codigo)
             referencia.putFile(uri!!)
+            rutaImagen.text = uri.path
         }
     }
 }

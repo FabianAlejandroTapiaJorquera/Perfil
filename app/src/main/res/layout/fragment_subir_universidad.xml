@@ -20,61 +20,64 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/auNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nombre Institución"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/auDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Dirección institución"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/auTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Telefono(s) institución"
+                android:inputType="text" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/agFotoPerfil"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/perfil"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/auFotoRuta"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:hint="Selecciones una imagen para la institución"
+                     />
 
-                    <EditText
-                        android:id="@+id/auNombre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="Nombre Institución"
-                        android:inputType="text" />
-
-                    <EditText
-                        android:id="@+id/auDireccion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="Dirección institución"
-                        android:inputType="text" />
-
-                    <EditText
-                        android:id="@+id/auTelefono"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="Telefono(s) institución"
-                        android:inputType="text" />
-                </LinearLayout>
-
+                <ImageButton
+                    android:id="@+id/auFoto"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/subir_foto"
+                    android:background="#006200EE"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/descartarUniversidadBTN"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="Descartar" />
 
@@ -85,8 +88,8 @@
 
                 <Button
                     android:id="@+id/subirUniversidadBTN"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="Subir" />
             </LinearLayout>
