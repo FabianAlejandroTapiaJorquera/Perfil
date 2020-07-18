@@ -8,10 +8,38 @@
         android:id="@+id/inicioFragment"
         android:name="com.example.perfil.iu.navegacionPrincipal.InicioFragment"
         android:label="fragment_inicio"
-        tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_universidadPerfilFragment"
+            app:destination="@id/universidadPerfilFragment" />
+        <action
+            android:id="@+id/pasarImagenIF_IF"
+            app:destination="@id/imagenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="com.example.perfil.iu.navegacionPrincipal.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/universidadPerfilFragment"
+        android:name="com.example.perfil.iu.UniversidadPerfilFragment"
+        android:label="fragment_universidad_perfil"
+        tools:layout="@layout/fragment_universidad_perfil" >
+        <action
+            android:id="@+id/action_universidadPerfilFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imagenFragment"
+        android:name="com.example.perfil.iu.ImagenFragment"
+        android:label="fragment_imagen"
+        tools:layout="@layout/fragment_imagen" >
+        <argument
+            android:name="logo"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_imagenFragment_to_inicioFragment"
+            app:destination="@id/inicioFragment" />
+    </fragment>
 </navigation>

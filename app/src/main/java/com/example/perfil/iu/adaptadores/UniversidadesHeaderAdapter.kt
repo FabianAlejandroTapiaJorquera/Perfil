@@ -11,7 +11,7 @@ import com.example.perfil.Universidad
 import kotlinx.android.synthetic.main.universidades.view.*
 import kotlinx.android.synthetic.main.universidades_favoritas.view.*
 
-class UniversidadesFavoritasAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UniversidadesHeaderAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return UniversidadesAdapterViewHolder(LayoutInflater.from(context).inflate(R.layout.universidades_favoritas, null, false))
     }

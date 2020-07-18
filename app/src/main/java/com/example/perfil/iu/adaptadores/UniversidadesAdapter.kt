@@ -10,7 +10,17 @@ import com.example.perfil.R
 import com.example.perfil.Universidad
 import kotlinx.android.synthetic.main.universidades.view.*
 
-class UniversidadesAdapter(val context: Context, val universidades: ArrayList<Universidad>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UniversidadesAdapter(
+    private val context: Context,
+    private val universidades: ArrayList<Universidad>,
+    private val itemClickListener: OnUniversidadClickListener
+    ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    interface OnUniversidadClickListener{
+        fun OnImagenClick(logo: String)
+        fun OnItemClick(universidad: Universidad)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return UniversidadesAdapteriVewHolder(LayoutInflater.from(context).inflate(R.layout.universidades, null, false))
     }
@@ -30,6 +40,8 @@ class UniversidadesAdapter(val context: Context, val universidades: ArrayList<Un
     inner class UniversidadesAdapteriVewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         fun setearUniversidades(universidad: Universidad){
+            itemView.setOnClickListener { itemClickListener.OnItemClick(universidad) }
+            itemView.imagenUniversidad.setOnClickListener { itemClickListener.OnImagenClick(universidad.logo) }
             itemView.nombreUniversidad.text = universidad.nombre
             Glide.with(context).load(universidad.logo).into(itemView.imagenUniversidad)
             itemView.direccionUniversidad.text = universidad.direccion
