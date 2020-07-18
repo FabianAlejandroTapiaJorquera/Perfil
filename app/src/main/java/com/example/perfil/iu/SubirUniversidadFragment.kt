@@ -80,7 +80,7 @@ class SubirUniversidadFragment : DialogFragment() {
         }
 
         subir.setOnClickListener {
-            firebase = SubirUniversidadBD(SubirUniversidad(Universidad(nombre.text.toString(), "", codigo)))
+            firebase = SubirUniversidadBD(SubirUniversidad(Universidad(nombre.text.toString(), "", codigo, auDireccion.text.toString())))
             firebase.subirUniversidadBD()
             dismiss()
         }
