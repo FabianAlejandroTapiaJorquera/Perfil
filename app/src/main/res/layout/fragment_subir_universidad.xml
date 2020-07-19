@@ -48,30 +48,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/auFotoRuta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:hint="Selecciones una imagen para la institución"
-                     />
-
-                <ImageButton
-                    android:id="@+id/auFoto"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="0"
-                    android:src="@drawable/subir_foto"
-                    android:background="#006200EE"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:weightSum="2">
 
                 <Button

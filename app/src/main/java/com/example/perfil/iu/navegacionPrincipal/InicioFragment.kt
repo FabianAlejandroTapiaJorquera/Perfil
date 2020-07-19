@@ -6,30 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.MergeAdapter
 
 import com.example.perfil.R
+import com.example.perfil.Resultado
 import com.example.perfil.Universidad
-import com.example.perfil.iu.ImagenFragmentDirections
 import com.example.perfil.iu.SubirUniversidadFragment
 import com.example.perfil.iu.adaptadores.UniversidadesAdapter
 import com.example.perfil.iu.adaptadores.UniversidadesHeaderAdapter
 import com.example.perfil.iu.adaptadores.UniversidadesTodasAdapter
+import com.example.perfil.repositorio.local.UniversidadesUseCaseImplemented
+import com.example.perfil.repositorio.nube.UniversidadesDB
+import com.example.perfil.viewModel.UniversidadVM
+import com.example.perfil.viewModel.UniversidadVMFactory
 import kotlinx.android.synthetic.main.fragment_inicio.*
 
 
 class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListener {
 
+    private val universidadesFavoritasAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
+    private val universidadesRestoAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
+
+    private val universidadViewModel by lazy {
+        ViewModelProvider(this, UniversidadVMFactory(UniversidadesUseCaseImplemented(UniversidadesDB()))).get(UniversidadVM::class.java)
+    }
+
     private val subirUniversidadFragment by lazy { SubirUniversidadFragment() }
     private val universidades by lazy { ArrayList<Universidad>() }
-    private val universidadesFavoritas by lazy { ArrayList<Universidad>() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,17 +49,15 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        llenarUniversidades()
-        llenarUniversidadesFavoritas()
-
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-        val universidadesFavoritasAdapter = UniversidadesAdapter(requireContext(), universidadesFavoritas, this)
-        val universidadesRestoAdapter = UniversidadesAdapter(requireContext(), universidades, this)
         val universidadesHeaderAdapter = UniversidadesHeaderAdapter(requireContext())
         val universidadesTodasAdapter = UniversidadesTodasAdapter(requireContext())
         val mergeAdapter = MergeAdapter(universidadesHeaderAdapter, universidadesFavoritasAdapter, universidadesTodasAdapter, universidadesRestoAdapter)
         recyclerView.adapter = mergeAdapter
+
+        observarDatos()
+
         funcionesBotones()
 
 
@@ -64,7 +70,9 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
     }
 
     override fun OnItemClick(universidad: Universidad) {
-        Toast.makeText(context, "AUN NO HACE NADA", Toast.LENGTH_SHORT).show()
+        val universidad = arrayOf(universidad.nombre, universidad.codigo, universidad.logo, universidad.direccion)
+        val accion = InicioFragmentDirections.actionInicioFragmentToUniversidadPerfilFragment(universidad)
+        findNavController().navigate(accion)
     }
 
     fun funcionesBotones(){
@@ -73,18 +81,41 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
             subirUniversidadFragment.show(childFragmentManager, "Subir Universidad")
         }
     }
-    fun llenarUniversidades(){
-        universidades.add(Universidad("U de Chile", "https://www.uchile.cl/image/f159277-0-h.jpeg?3144", "123446", "Las Palmeras"))
-        universidades.add(Universidad("UC", "https://lh3.googleusercontent.com/proxy/1TA6QpGubyn1DsoM_aWPZkt-AlotXlCw3AyHSgt1eZ-jHJVujUADexdAgG4whZyX95nBmBjEdGEBbxOOC5iF4CeKSzw19V4TKymav2bpRgHBSQl-LsI4XpY", "122455", "San Joaquín"))
-    }
-    fun llenarUniversidadesFavoritas(){
-        universidadesFavoritas.add(Universidad("Utem", "https://upload.wikimedia.org/wikipedia/commons/4/43/Logo_UTEM.png", "123456", "Las Palmeras"))
-        universidadesFavoritas.add(Universidad("Usach", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Logo-Color-Usach-Web.jpg/1200px-Logo-Color-Usach-Web.jpg", "123455", "Estación Central"))
+    fun observarDatos(){
+        universidadViewModel.universidades.observe(viewLifecycleOwner, Observer { resultado->
+            when(resultado){
+                is Resultado.Loading -> {
+                    showProgressBar()
+                }
+                is Resultado.Success -> {
+                    if(resultado.dato.isEmpty())
+                        sinUniversidades.visibility = View.VISIBLE
+                    else {
+                        val array = ArrayList<Universidad>()
+                        array.addAll(resultado.dato)
+                        universidadesFavoritasAdapter.setearUniversidades(array)
+                        universidadesRestoAdapter.setearUniversidades(array)
+                        universidadesFavoritasAdapter.notifyDataSetChanged()
+                        universidadesRestoAdapter.notifyDataSetChanged()
+                    }
+                    hideProgressBar()
+                }
+                is Resultado.Error -> {
+                    Toast.makeText(requireContext(), "No se pudo conectar a la base de datos ${resultado.exception.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         universidades.clear()
-        universidadesFavoritas.clear()
+    }
+
+    fun showProgressBar(){
+        progressBar.visibility = View.VISIBLE
+    }
+    fun hideProgressBar(){
+        progressBar.visibility = View.GONE
     }
 }

@@ -29,6 +29,8 @@
         <action
             android:id="@+id/action_universidadPerfilFragment_to_inicioFragment"
             app:destination="@id/inicioFragment" />
+        <argument android:name="Universidad"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/imagenFragment"

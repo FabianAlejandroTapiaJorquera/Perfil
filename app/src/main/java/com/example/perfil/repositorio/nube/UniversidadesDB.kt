@@ -15,8 +15,8 @@ class UniversidadesDB: IUniversidadesDB {
             universidades.add(
                 Universidad(
                     documento.get("nombre").toString(),
-                    documento.get("logo").toString(),
                     documento.get("codigo").toString(),
+                    documento.get("logo").toString(),
                     documento.get("direccion").toString()
                 )
             )

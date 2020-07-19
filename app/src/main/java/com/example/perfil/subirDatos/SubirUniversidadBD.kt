@@ -4,4 +4,7 @@ class SubirUniversidadBD(private val universidad: ISubirUniversidad){
     fun subirUniversidadBD(){
         universidad.subirUniversidad()
     }
+    fun actualizarImagenPerfil(url: String){
+        universidad.actualizarLogo(url)
+    }
 }
