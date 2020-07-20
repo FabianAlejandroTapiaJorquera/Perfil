@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.perfil.R
@@ -43,7 +44,7 @@ class UniversidadPerfilFragment : Fragment() {
         //Seteando fragment_universidad_perfil
         pNombreUniversidad.text = args.Universidad[0]
         if(args.Universidad[2] != "")
-            Glide.with(this).load(args.Universidad[3]).into(profile_image)
+            Glide.with(this).load(args.Universidad[2]).into(profile_image)
     }
     fun funcionesBotones(){
         //OnClik de los botones de fragment_universidad_perfil
@@ -65,6 +66,7 @@ class UniversidadPerfilFragment : Fragment() {
                     val nuevaImagen = SubirUniversidadBD(SubirUniversidad(Universidad(args.Universidad[0], args.Universidad[1], args.Universidad[2], args.Universidad[3])))
                     url = it.result.toString()
                     nuevaImagen.actualizarImagenPerfil(url)
+                    Glide.with(this).load(url).into(profile_image)
                 }
             }
         }

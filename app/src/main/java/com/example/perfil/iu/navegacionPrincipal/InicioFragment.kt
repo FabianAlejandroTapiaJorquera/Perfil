@@ -1,13 +1,19 @@
 package com.example.perfil.iu.navegacionPrincipal
 
+import android.graphics.Insets.add
 import android.os.Bundle
+import android.system.Os.remove
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.OneShotPreDrawListener.add
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +23,7 @@ import com.example.perfil.R
 import com.example.perfil.Resultado
 import com.example.perfil.Universidad
 import com.example.perfil.iu.SubirUniversidadFragment
+import com.example.perfil.iu.UniversidadPerfilFragment
 import com.example.perfil.iu.adaptadores.UniversidadesAdapter
 import com.example.perfil.iu.adaptadores.UniversidadesHeaderAdapter
 import com.example.perfil.iu.adaptadores.UniversidadesTodasAdapter
@@ -24,6 +31,7 @@ import com.example.perfil.repositorio.local.UniversidadesUseCaseImplemented
 import com.example.perfil.repositorio.nube.UniversidadesDB
 import com.example.perfil.viewModel.UniversidadVM
 import com.example.perfil.viewModel.UniversidadVMFactory
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_inicio.*
 
 
@@ -31,6 +39,8 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
 
     private val universidadesFavoritasAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
     private val universidadesRestoAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
+    private val universidadesTodasAdapter by lazy { UniversidadesTodasAdapter(requireContext()) }
+    private val universidadesHeaderAdapter by lazy { UniversidadesHeaderAdapter(requireContext()) }
 
     private val universidadViewModel by lazy {
         ViewModelProvider(this, UniversidadVMFactory(UniversidadesUseCaseImplemented(UniversidadesDB()))).get(UniversidadVM::class.java)
@@ -38,6 +48,7 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
 
     private val subirUniversidadFragment by lazy { SubirUniversidadFragment() }
     private val universidades by lazy { ArrayList<Universidad>() }
+    private val universidadesFavoritas by lazy { ArrayList<Universidad>() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,19 +57,25 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
          return inflater.inflate(R.layout.fragment_inicio, container, false)
     }
 
+    private lateinit var transaction: FragmentTransaction
+    private lateinit var fragment: Fragment
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-        val universidadesHeaderAdapter = UniversidadesHeaderAdapter(requireContext())
-        val universidadesTodasAdapter = UniversidadesTodasAdapter(requireContext())
         val mergeAdapter = MergeAdapter(universidadesHeaderAdapter, universidadesFavoritasAdapter, universidadesTodasAdapter, universidadesRestoAdapter)
         recyclerView.adapter = mergeAdapter
 
         observarDatos()
-
         funcionesBotones()
+
+        layoutRefrescante.setOnRefreshListener {
+            fragment = InicioFragment()
+            parentFragmentManager.beginTransaction().add(R.id.nav_host_fragment,fragment).remove(this).commit()
+            layoutRefrescante.isRefreshing = false
+        }
 
 
     }

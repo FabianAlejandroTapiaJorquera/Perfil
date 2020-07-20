@@ -92,8 +92,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/profesores"
@@ -104,11 +104,11 @@
                     android:id="@+id/pNombreUniversidad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorNegro"
-                    android:textStyle="bold"
                     android:layout_gravity="center"
+                    android:text="Nombre de la institución"
+                    android:textColor="@color/colorNegro"
                     android:textSize="20dp"
-                    android:text="Nombre de la institución" />
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
