@@ -37,6 +37,8 @@ import kotlinx.android.synthetic.main.fragment_inicio.*
 
 class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListener {
 
+    private lateinit var fragment: Fragment
+
     private val universidadesFavoritasAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
     private val universidadesRestoAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
     private val universidadesTodasAdapter by lazy { UniversidadesTodasAdapter(requireContext()) }
@@ -56,9 +58,6 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
     ): View? {
          return inflater.inflate(R.layout.fragment_inicio, container, false)
     }
-
-    private lateinit var transaction: FragmentTransaction
-    private lateinit var fragment: Fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

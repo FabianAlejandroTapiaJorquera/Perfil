@@ -13,12 +13,17 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.perfil.R
 import com.example.perfil.Universidad
+import com.example.perfil.iu.adaptadores.ViewPagerAdapter
 import com.example.perfil.subirDatos.SubirUniversidad
 import com.example.perfil.subirDatos.SubirUniversidadBD
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_universidad_perfil.*
 
 class UniversidadPerfilFragment : Fragment() {
+
+    private val adaptador by lazy { ViewPagerAdapter(this) }
 
     //Datos que llegan desde InicioFragment
     val args by navArgs<UniversidadPerfilFragmentArgs>()
@@ -35,6 +40,14 @@ class UniversidadPerfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewPager.adapter = adaptador
+        TabLayoutMediator(tabLayout, viewPager) { tab: TabLayout.Tab, position: Int ->
+           when(position){
+               0 -> tab.text = "Información"
+               1 -> tab.text = "Academicos"
+           }
+        }.attach()
 
         setearLayout()
         funcionesBotones()
