@@ -39,9 +39,7 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
 
     private lateinit var fragment: Fragment
 
-    private val universidadesFavoritasAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
-    private val universidadesRestoAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
-    private val universidadesTodasAdapter by lazy { UniversidadesTodasAdapter(requireContext()) }
+    private val universidadesAdapter by lazy { UniversidadesAdapter(requireContext(), this) }
     private val universidadesHeaderAdapter by lazy { UniversidadesHeaderAdapter(requireContext()) }
 
     private val universidadViewModel by lazy {
@@ -50,7 +48,6 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
 
     private val subirUniversidadFragment by lazy { SubirUniversidadFragment() }
     private val universidades by lazy { ArrayList<Universidad>() }
-    private val universidadesFavoritas by lazy { ArrayList<Universidad>() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,15 +61,14 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
-        val mergeAdapter = MergeAdapter(universidadesHeaderAdapter, universidadesFavoritasAdapter, universidadesTodasAdapter, universidadesRestoAdapter)
+        val mergeAdapter = MergeAdapter(universidadesHeaderAdapter, universidadesAdapter)
         recyclerView.adapter = mergeAdapter
 
         observarDatos()
         funcionesBotones()
 
         layoutRefrescante.setOnRefreshListener {
-            fragment = InicioFragment()
-            parentFragmentManager.beginTransaction().add(R.id.nav_host_fragment,fragment).remove(this).commit()
+            refrescarUI()
             layoutRefrescante.isRefreshing = false
         }
 
@@ -82,7 +78,6 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
     override fun OnImagenClick(logo: String) {
         val accion = InicioFragmentDirections.pasarImagenIFIF(logo)
         findNavController().navigate(accion)
-
     }
 
     override fun OnItemClick(universidad: Universidad) {
@@ -109,10 +104,8 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
                     else {
                         val array = ArrayList<Universidad>()
                         array.addAll(resultado.dato)
-                        universidadesFavoritasAdapter.setearUniversidades(array)
-                        universidadesRestoAdapter.setearUniversidades(array)
-                        universidadesFavoritasAdapter.notifyDataSetChanged()
-                        universidadesRestoAdapter.notifyDataSetChanged()
+                        universidadesAdapter.setearUniversidades(array)
+                        universidadesAdapter.notifyDataSetChanged()
                     }
                     hideProgressBar()
                 }
@@ -133,5 +126,10 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
     }
     fun hideProgressBar(){
         progressBar.visibility = View.GONE
+    }
+    fun refrescarUI(){
+        fragment = InicioFragment()
+        parentFragmentManager.beginTransaction().add(R.id.nav_host_fragment,fragment).remove(this).commit()
+
     }
 }

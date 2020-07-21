@@ -8,12 +8,19 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavHost
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.perfil.R
 import com.example.perfil.Universidad
+import com.example.perfil.iu.navegacionPrincipal.InicioFragment
 import com.example.perfil.subirDatos.SubirUniversidad
 import com.example.perfil.subirDatos.SubirUniversidadBD
 import com.google.android.gms.tasks.OnSuccessListener
@@ -35,6 +42,7 @@ class SubirUniversidadFragment : DialogFragment() {
     private lateinit var nombre: EditText
     private lateinit var direccion: EditText
     private lateinit var telefono: EditText
+    private lateinit var host: View
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return crearDialogo()
@@ -86,5 +94,6 @@ class SubirUniversidadFragment : DialogFragment() {
             }
         }
     }
+
 }
 
