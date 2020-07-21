@@ -6,5 +6,4 @@ import com.example.perfil.Universidad
 interface IUniversidadesDB {
 
     suspend fun obtenerUniversidades(): Resultado<List<Universidad>>
-
 }

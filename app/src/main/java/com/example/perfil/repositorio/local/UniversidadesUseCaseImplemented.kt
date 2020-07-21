@@ -9,5 +9,4 @@ class UniversidadesUseCaseImplemented(private val universidadDB: IUniversidadesD
     override suspend fun traerUniversidadesNube(): Resultado<List<Universidad>> {
         return universidadDB.obtenerUniversidades()
     }
-
 }
