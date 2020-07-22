@@ -1,14 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".iu.navegacionTab.DatosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/perfilHeaderTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Datos Institución"
+        android:textColor="@color/colorNegro"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/perfilHeaderTV">
+
+        <TextView
+            android:id="@+id/perfilDireccionTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp"
+            tools:text="Dirección: Aquí ira la dirección de la institución" />
+
+        <TextView
+            android:id="@+id/perfilTelefonoTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp"
+            tools:text="Telefono: (+56) 9 12345678" />
+
+        <TextView
+            android:id="@+id/perfilEmailTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp"
+            tools:text="Email: ejemplo@institucion.cl" />
+
+        <TextView
+            android:id="@+id/perfilWebTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp"
+            tools:text="Web: www.institdución.cl" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/perfilSubHeadertv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Redes Sociales"
+        android:textColor="@color/colorNegro"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/perfilSubHeadertv">
+
+        <TextView
+            android:id="@+id/perfilFacebookTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Facebook: http://algo.profile.com"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/perfilInstagramTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Instagram: http://algo.profile.cl"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/perfilTwitterTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Twitter: http://algo.profile.net"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorNegro"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/facebookButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorTransparente"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icono_facebook" />
+
+        <ImageButton
+            android:id="@+id/instagramButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorTransparente"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icono_instagram" />
+
+        <ImageButton
+            android:id="@+id/twitterButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/colorTransparente"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icono_twitter" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/editar_datos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

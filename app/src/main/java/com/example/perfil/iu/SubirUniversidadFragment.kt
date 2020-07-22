@@ -73,7 +73,7 @@ class SubirUniversidadFragment : DialogFragment() {
             else {
                 firebase = SubirUniversidadBD(SubirUniversidad(Universidad(nombre.text.toString(), codigo, "", direccion.text.toString())))
                 firebase.subirUniversidadBD()
-                Toast.makeText(requireContext(), "Se agrego un nuevo elemento a la base de datos. Por favor desliza hacia abajo para actualizar!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Institución agregada", Toast.LENGTH_SHORT).show()
                 dismiss()
             }
         }

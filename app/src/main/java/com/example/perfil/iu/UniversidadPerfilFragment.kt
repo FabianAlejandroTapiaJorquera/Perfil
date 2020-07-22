@@ -16,6 +16,7 @@ import com.example.perfil.R
 import com.example.perfil.Universidad
 import com.example.perfil.iu.adaptadores.ViewPagerAdapter
 import com.example.perfil.iu.navegacionPrincipal.InicioFragment
+import com.example.perfil.iu.navegacionPrincipal.InicioFragmentDirections
 import com.example.perfil.subirDatos.SubirUniversidad
 import com.example.perfil.subirDatos.SubirUniversidadBD
 import com.google.android.material.tabs.TabLayout

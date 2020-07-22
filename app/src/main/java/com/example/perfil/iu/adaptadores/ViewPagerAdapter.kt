@@ -13,8 +13,8 @@ class ViewPagerAdapter(fa: Fragment): FragmentStateAdapter(fa) {
         val fragment1 = DatosFragment()
         val fragment2 = AcademicosFragment()
         when(position){
-            1 -> { return fragment1 }
-            2 -> { return fragment2 }
+            0 -> { return fragment1 }
+            1 -> { return fragment2 }
             else -> { return fragment1 }
         }
     }

@@ -31,6 +31,12 @@
         <action
             android:id="@+id/action_universidadPerfilFragment_to_inicioFragment"
             app:destination="@id/inicioFragment" />
+        <action
+            android:id="@+id/action_universidadPerfilFragment_to_datosFragment"
+            app:destination="@id/datosFragment" />
+        <action
+            android:id="@+id/action_universidadPerfilFragment_to_academicosFragment"
+            app:destination="@id/academicosFragment" />
     </fragment>
     <fragment
         android:id="@+id/imagenFragment"
@@ -44,4 +50,14 @@
             android:id="@+id/action_imagenFragment_to_inicioFragment"
             app:destination="@id/inicioFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/datosFragment"
+        android:name="com.example.perfil.iu.navegacionTab.DatosFragment"
+        android:label="fragment_datos"
+        tools:layout="@layout/fragment_datos" />
+    <fragment
+        android:id="@+id/academicosFragment"
+        android:name="com.example.perfil.iu.navegacionTab.AcademicosFragment"
+        android:label="fragment_academicos"
+        tools:layout="@layout/fragment_academicos" />
 </navigation>

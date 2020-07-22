@@ -49,12 +49,6 @@ class InicioFragment : Fragment(), UniversidadesAdapter.OnUniversidadClickListen
         recyclerView.adapter = mergeAdapter
 
         funcionesBotones()
-
-        layoutRefrescante.setOnRefreshListener {
-            layoutRefrescante.isRefreshing = false
-        }
-
-
     }
 
     override fun OnImagenClick(logo: String) {
